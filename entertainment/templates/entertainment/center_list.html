@@ -1,0 +1,24 @@
+<!-- templates/entertainment/center_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список развлекательных центров</title>
+</head>
+<body>
+    <h1>Список развлекательных центров</h1>
+
+    <ul>
+        {% for center in centers %}
+            <li>
+                <a href="{% url 'center_detail' pk=center.pk %}">{{ center.name }}</a> - {{ center.center_type.name }}
+                <!-- Добавляем кнопку удаления -->
+                <a href="{% url 'center_delete' pk=center.pk %}" onclick="return confirm('Вы уверены, что хотите удалить этот центр?')">Удалить</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'center_add' %}">Добавить новый центр</a>
+</body>
+</html>

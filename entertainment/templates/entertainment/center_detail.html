@@ -1,0 +1,6 @@
+<h1>{{ center.name }}</h1>
+<p>{{ center.description }}</p>
+<p><strong>Адрес:</strong> {{ center.address }}</p>
+<p><strong>Тип:</strong> {{ center.center_type.name }}</p>
+<a href="{% url 'center_edit' center.pk %}">Редактировать</a>
+<a href="{% url 'center_list' %}">Назад</a>

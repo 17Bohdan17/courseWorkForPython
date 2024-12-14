@@ -1,0 +1,7 @@
+<!-- add_center_type.html -->
+<h2>Добавить новый тип развлекательного центра</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить</button>
+</form>

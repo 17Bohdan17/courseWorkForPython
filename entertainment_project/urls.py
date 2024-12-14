@@ -4,6 +4,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),           # Панель администратора
-    path('centers/', include('centers.urls')), # Все маршруты из приложения "centers"
+    path('entertainment/', include('entertainment.urls')), # Все маршруты из приложения "entertainment"
 ]
 

@@ -1,0 +1,45 @@
+
+-- Створення таблиці для типів розважальних центрів
+CREATE TABLE center_types (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT
+);
+
+-- Створення таблиці для розважальних центрів
+CREATE TABLE entertainment_centers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    address VARCHAR(255),
+    center_type_id INT REFERENCES center_types(id) ON DELETE SET NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Створення таблиці для подій
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    date TIMESTAMP,
+    entertainment_center_id INT REFERENCES entertainment_centers(id) ON DELETE CASCADE,
+    description TEXT
+);
+
+-- Створення таблиці для користувачів
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Створення таблиці для відгуків
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    entertainment_center_id INT REFERENCES entertainment_centers(id) ON DELETE CASCADE,
+    rating INT CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
