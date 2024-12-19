@@ -1,6 +1,61 @@
-<h1>{{ center.name }}</h1>
-<p>{{ center.description }}</p>
-<p><strong>Адрес:</strong> {{ center.address }}</p>
-<p><strong>Тип:</strong> {{ center.center_type.name }}</p>
-<a href="{% url 'center_edit' center.pk %}">Редактировать</a>
-<a href="{% url 'center_list' %}">Назад</a>
+{% extends 'entertainment/navbar.html' %}
+
+{% block content %}
+<style>
+
+        body {
+            background-color: #003f88;
+            color: black; /* білий текст */
+
+        }
+
+        .container {
+            text-align: center; /* Центрування контенту в контейнері */
+            margin-top: 50px; /* Додано відступ з верхньої частини */
+            width: 600px;
+        }
+
+        .card {
+            background-color: #a8d8d8; /* м'ятний колір для карток */
+        }
+
+        .navbar-light.bg-light {
+            background-color: #a8d8d8 !important; /* м'ятний колір для навбару */
+        }
+         .navbar-nav {
+            justify-content: center;
+            width: 100%;
+        }
+
+
+    </style>
+
+    <div class="container my-4">
+        <h1 class="mb-4">{{ center.name }}</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Опис</h5>
+                <p class="card-text">{{ center.description }}</p>
+
+                <h5 class="card-title">Адреса</h5>
+                <p class="card-text">{{ center.address }}</p>
+
+                <h5 class="card-title">Тип центру</h5>
+                <p class="card-text">{{ center.center_type.name }}</p>
+
+
+
+
+
+
+
+
+                <!-- Кнопка для редагування центру -->
+                <a href="{% url 'center_edit' pk=center.pk %}" class="btn btn-warning mt-3">Редагувати</a>
+                <!-- Кнопка для повернення до списку центрів -->
+                <a href="{% url 'center_list' %}" class="btn btn-primary mt-3">Повернутись до списку</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,19 +1,17 @@
-<!-- templates/entertainment/center_confirm_delete.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Удаление центра</title>
-</head>
-<body>
-    <h1>Вы уверены, что хотите удалить центр "{{ center.name }}"?</h1>
+{% extends 'entertainment/navbar.html' %}
 
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit">Удалить</button>
-    </form>
-
-    <a href="{% url 'center_list' %}">Отмена</a>
-</body>
-</html>
+{% block content %}
+<div class="container my-4">
+    <h1 class="text-center mb-4">Видалення центру "{{ center.name }}"</h1>
+    <div class="text-center">
+        <p>Ви впевнені, що хочете видалити цей центр? Це дія є незворотною.</p>
+        <!-- Форма для підтвердження видалення центру -->
+        <form method="POST" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Видалити</button>
+        </form>
+        <!-- Кнопка для скасування видалення та повернення до списку центрів -->
+        <a href="{% url 'center_list' %}" class="btn btn-secondary">Скасувати</a>
+    </div>
+</div>
+{% endblock %}

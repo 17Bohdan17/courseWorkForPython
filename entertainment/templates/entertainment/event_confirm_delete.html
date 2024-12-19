@@ -1,0 +1,73 @@
+{% extends 'entertainment/navbar.html' %}
+
+{% block content %}
+
+ <style>
+        /* Фон сторінки */
+        body {
+            background-color: #6a4c9c; /* фіолетовий фон */
+            color: white; /* білий текст */
+            margin: 0; /* Відступи по замовчуванню */
+            padding: 0; /* Відступи по замовчуванню */
+        }
+
+        .container {
+            text-align: center; /* Центрування контенту в контейнері */
+            margin-top: 50px; /* Додано відступ з верхньої частини */
+        }
+
+        .card {
+            background-color: #a8d8d8; /* м'ятний колір для карток */
+            color: black; /* текст чорний */
+            margin-bottom: 20px; /* Відступи між картками */
+        }
+
+        .btn {
+            margin-top: 10px; /* відступ для кнопок */
+        }
+
+          /* Колір фону для навбару */
+        .navbar-light.bg-light {
+            background-color: #a8d8d8 !important; /* м'ятний колір для навбару */
+        }
+
+        /* Центрування карток по горизонталі */
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+
+         /* Центрування навбару */
+        .navbar-nav {
+            justify-content: center;
+            width: 100%;
+        }
+
+        .btn-danger {
+            width: auto;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem; /* збільшений розмір заголовка */
+        }
+
+        p {
+            font-size: 1.2rem; /* збільшений розмір тексту */
+        }
+
+        .btn-secondary {
+            width: auto; /* коригування ширини кнопки */
+        }
+    </style>
+<div class="container my-4">
+    <h1>Підтвердження видалення</h1>
+    <p>Ви впевнені, що хочете видалити подію <strong>{{ event.name }}</strong>?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Видалити</button>
+        <a href="{% url 'event_list' %}" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>
+{% endblock %}
