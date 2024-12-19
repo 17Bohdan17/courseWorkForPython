@@ -13,8 +13,4 @@ urlpatterns = [
     path('event/<int:pk>/', views.event_detail, name='event_detail'),  # деталі події
     path('event/<int:pk>/delete/', views.event_delete, name='event_delete'),
 
-
-
-
-
 ]

@@ -7,40 +7,42 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <!-- navbar -->
+<!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'center_list' %}">Розважальні центри</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="{% url 'center_list' %}">entertainmentcenters.ua</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="btn btn-primary mx-2" href="{% url 'center_add' %}">Додати центр</a>
+                    <a class="btn btn-primary mx-2" href="{% url 'center_add' %}">Додати новий розважальний центр</a>
                 </li>
 
                 <!-- Кнопка для додавання типу центру -->
                 <li class="nav-item">
-                    <a class="btn btn-success mx-2" href="{% url 'center_type_add' %}">Додати тип центру</a>
+                    <a class="btn btn-success mx-2" href="{% url 'center_type_add' %}">Додати новий тип розважального
+                        центру</a>
                 </li>
 
                 <!-- Додаткові кнопки -->
                 <li class="nav-item">
-                    <a class="btn btn-info mx-2" href="{% url 'event_list' %}">Події</a>
+                    <a class="btn btn-info mx-2" href="{% url 'event_list' %}">Перейти до подій</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-    <!-- Контент сторінки -->
-    <div class="container my-4">
-        {% block content %}
-        {% endblock %}
-    </div>
+<!-- Контент сторінки -->
+<div class="container my-4">
+    {% block content %}
+    {% endblock %}
+</div>
 
-  {% if messages %}
+{% if messages %}
 <div class="container mt-3">
     {% for message in messages %}
     <div class="alert alert-{{ message.tags }}">
@@ -50,6 +52,6 @@
 </div>
 {% endif %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

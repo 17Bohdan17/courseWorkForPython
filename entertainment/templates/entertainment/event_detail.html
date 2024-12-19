@@ -1,58 +1,27 @@
 <!DOCTYPE html>
-
 {% extends 'entertainment/navbar.html' %}
-
-
-
-
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ event.name }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
-
 <body>
-    {% block content %}
-
-    <style>
+{% block content %}
+<style>
         /* Фон сторінки */
         body {
             background-color: #6a4c9c; /* фіолетовий фон */
-            color: white; /* білий текст */
-            margin: 0; /* Відступи по замовчуванню */
-            padding: 0; /* Відступи по замовчуванню */
+            color: white;
         }
 
         .container {
-            text-align: center; /* Центрування контенту в контейнері */
-            margin-top: 50px; /* Додано відступ з верхньої частини */
-        }
-
-        .card {
-            background-color: #a8d8d8; /* м'ятний колір для карток */
-            color: black; /* текст чорний */
-            margin-bottom: 20px; /* Відступи між картками */
-        }
-
-        .btn {
-            margin-top: 10px; /* відступ для кнопок */
-        }
-
-        .btn-danger {
-            width: auto;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        h1 {
-            font-size: 2.5rem; /* збільшений розмір заголовка */
+            text-align: center; /* Центрування контенту */
         }
 
         p {
-            font-size: 1.2rem; /* збільшений розмір тексту */
+            font-size: 1.3rem; /* збільшений розмір тексту */
         }
 
         .btn-secondary {
@@ -69,16 +38,17 @@
             width: 100%;
         }
 
-    </style>
-    <div class="container my-4">
-        <h1>{{ event.name }}</h1>
-        <p>{{ event.description }}</p>
-        <p><strong>Дата:</strong> {{ event.date }}</p>
-        <a href="{% url 'event_list' %}" class="btn btn-secondary">Назад до списку</a>
-    </div>
 
-    <a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">Видалити</a>
-    {% endblock %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</style>
+<div class="container my-4">
+    <h1>{{ event.name }}</h1>
+    <p>{{ event.description }}</p>
+    <p><strong>Дата:</strong> {{ event.date }}</p>
+    <a href="{% url 'event_list' %}" class="btn btn-secondary">Назад до списку</a>
+</div>
+
+<a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">Видалити</a>
+{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

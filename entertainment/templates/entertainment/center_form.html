@@ -4,20 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форма центру</title>
+    <title>Додати розважальний центр</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
-
 <style>
     body {
         background-color: #003f88; /* Темно-синій фон */
-        color: white; /* Білий текст */
+        color: white;
     }
 
     .container {
-        text-align: center; /* Центрування контенту в контейнері */
-        margin-top: 50px; /* Відступ зверху */
+        text-align: center; /* Центрування контенту*/
+        margin-top: 50px;
         width: 600px;
     }
 
@@ -33,63 +32,65 @@
         .navbar-nav .nav-item {
             text-align: center;
         }
+
 </style>
 
 <body>
-    <!-- Навбар -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'center_list' %}">Розважальні центри</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="btn btn-primary mx-2" href="{% url 'center_add' %}">Додати центр</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-success mx-2" href="{% url 'center_type_add' %}">Додати тип центру</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-info mx-2" href="{% url 'event_list' %}">Події</a>
-                    </li>
-                </ul>
-            </div>
+<!-- Навбар -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'center_list' %}">entertainmentcenters.ua</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="btn btn-primary mx-2" href="{% url 'center_add' %}">Додати новий розважальний центр</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-success mx-2" href="{% url 'center_type_add' %}">Додати новий тип розважального
+                        центру</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-info mx-2" href="{% url 'event_list' %}">Перейти до подій</a>
+                </li>
+            </ul>
         </div>
-    </nav>
-
-    <!-- Контейнер для форми -->
-    <div class="container">
-        <h1 class="my-4">Додати/Редагувати центр</h1>
-
-        <form method="post">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="id_name" class="form-label">Назва</label>
-                {{ form.name|add_class:"form-control" }}
-            </div>
-
-            <div class="mb-3">
-                <label for="id_description" class="form-label">Опис</label>
-                {{ form.description|add_class:"form-control" }}
-            </div>
-
-            <div class="mb-3">
-                <label for="id_address" class="form-label">Адреса</label>
-                {{ form.address|add_class:"form-control" }}
-            </div>
-
-            <div class="mb-3">
-                <label for="id_center_type" class="form-label">Тип центру</label>
-                {{ form.center_type|add_class:"form-select" }}
-            </div>
-
-            <!-- Кнопка для збереження або оновлення центру -->
-            <button type="submit" class="btn btn-success">{{ form.instance.pk|yesno:"Зберегти,Оновити" }}</button>
-        </form>
     </div>
+</nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Контейнер для форми -->
+<div class="container">
+    <h1 class="my-4">Додати/Редагувати центр</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_name" class="form-label">Назва закладу</label>
+            {{ form.name|add_class:"form-control" }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_description" class="form-label">Опис</label>
+            {{ form.description|add_class:"form-control" }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_address" class="form-label">Адреса</label>
+            {{ form.address|add_class:"form-control" }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_center_type" class="form-label">Тип розважального центру</label>
+            {{ form.center_type|add_class:"form-select" }}
+        </div>
+
+        <!-- Кнопка для збереження або оновлення центру -->
+        <button type="submit" class="btn btn-success">{{ form.instance.pk|yesno:"Зберегти,Оновити" }}</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

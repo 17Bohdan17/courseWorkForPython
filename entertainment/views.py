@@ -1,106 +1,78 @@
 from audioop import reverse
-
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import EntertainmentCenter, Visitor, Event
+from .models import EntertainmentCenter, Event
 from .forms import EntertainmentCenterForm, CenterTypeForm, EventForm
 from django.contrib import messages
 
+# === Блок функцій для управління розважальними центрами ===
 
-from django.shortcuts import render, redirect
-
-
-
-
-# Детали центра
-def center_detail(request, pk):
-    center = get_object_or_404(EntertainmentCenter, pk=pk)
-    return render(request, 'entertainment/center_detail.html', {'center': center})
-
-
-    if request.method == "POST":
-        form = VisitorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('center_detail', pk=center.pk)  # Перезагружаем страницу после добавления
-
-    else:
-        form = VisitorForm(initial={'center': center})
-
-    return render(request, 'entertainment/center_detail.html', {'center': center, 'form': form})
-
-
-# Добавление нового центра
+# Створення нового розважального центру
 def center_add(request):
     if request.method == "POST":
         form = EntertainmentCenterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('center_list')  # Перенаправляем на страницу списка
+            return redirect('center_list')  # Перенаправлення на сторінку зі списком центрів
     else:
-        form = EntertainmentCenterForm()  # Создаем пустую форму
+        form = EntertainmentCenterForm()  # Пустий шаблон форми
     return render(request, 'entertainment/center_form.html', {'form': form})
 
-# Редактирование центра
+
+# Редагування даних розважального центру
 def center_edit(request, pk):
-    center = get_object_or_404(EntertainmentCenter, pk=pk)
+    center = get_object_or_404(EntertainmentCenter, pk=pk)  # Отримання центру за первинним ключем
     if request.method == "POST":
-        form = EntertainmentCenterForm(request.POST, instance=center)
+        form = EntertainmentCenterForm(request.POST, instance=center)  # Передача існуючого об'єкта для редагування
         if form.is_valid():
-            form.save()
-            return redirect('center_detail', pk=center.pk)  # Перенаправляем на страницу с деталями
+            form.save()  # Збереження змін
+            return redirect('center_detail', pk=center.pk)  # Перенаправлення на деталі центру
     else:
-        form = EntertainmentCenterForm(instance=center)  # Загружаем данные существующего центра в форму
+        form = EntertainmentCenterForm(instance=center)  # Заповнення форми даними центру
     return render(request, 'entertainment/center_form.html', {'form': form})
 
+
+# Видалення розважального центру
+def center_delete(request, pk):
+    center = get_object_or_404(EntertainmentCenter, pk=pk)  # Отримання центру за первинним ключем
+    if request.method == "POST":  # Обробка підтвердження видалення
+        center.delete()
+        return redirect('center_list')  # Перенаправлення на список центрів
+    return render(request, 'entertainment/center_confirm_delete.html', {'center': center})
+
+
+# Перегляд списку розважальних центрів
+def center_list(request):
+    centers = EntertainmentCenter.objects.all()  # Отримання всіх центрів
+    return render(request, 'entertainment/center_list.html', {'centers': centers})
+
+
+# Перегляд деталей розважального центру
+def center_detail(request, pk):
+    center = get_object_or_404(EntertainmentCenter, pk=pk)  # Отримання центру за первинним ключем
+    return render(request, 'entertainment/center_detail.html', {'center': center})
+
+
+# Додавання типу розважального центру
 def center_type_add(request):
     if request.method == "POST":
         form = CenterTypeForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('center_list')  # После сохранения перенаправляем на список центров
+            return redirect('center_list')  # Перенаправлення на список центрів
     else:
         form = CenterTypeForm()
     return render(request, 'entertainment/center_type_form.html', {'form': form})
 
 
-def center_list(request):
-    centers = EntertainmentCenter.objects.all()  # Получаем все центры из базы данных
-    return render(request, 'entertainment/center_list.html', {'centers': centers})
+# === Блок функцій для управління подіями ===
 
-
-def center_edit(request, pk):
-    center = get_object_or_404(EntertainmentCenter, pk=pk)  # Получаем центр по первичному ключу (pk)
-
-    if request.method == "POST":
-        form = EntertainmentCenterForm(request.POST, instance=center)  # Передаем объект для редактирования
-        if form.is_valid():
-            form.save()  # Сохраняем изменения
-            return redirect('center_detail',
-                            pk=center.pk)  # Перенаправляем на страницу деталей отредактированного центра
-    else:
-        form = EntertainmentCenterForm(instance=center)  # Если GET-запрос, просто выводим форму с данными центра
-
-    return render(request, 'entertainment/center_form.html', {'form': form})
-
-
-# Функция для удаления центра
-# views.py
-
-def center_delete(request, pk):
-    center = get_object_or_404(EntertainmentCenter, pk=pk)  # Отримуємо центр по pk
-
-    if request.method == "POST":  # Якщо це POST запит (підтвердження видалення)
-        center.delete()  # Видаляємо центр
-        return redirect('center_list')  # Перенаправляємо на список центрів
-
-    return render(request, 'entertainment/center_confirm_delete.html', {'center': center})
-
-
+# Список подій
 def event_list(request):
-    events = Event.objects.all()  # або фільтрація за центром, якщо потрібно
+    events = Event.objects.all()  # Отримання всіх подій
     return render(request, 'entertainment/event_list.html', {'events': events})
 
-# Додавання нової події
+
+# Створення нової події
 def add_event(request):
     if request.method == 'POST':
         form = EventForm(request.POST)
@@ -111,23 +83,18 @@ def add_event(request):
         form = EventForm()
     return render(request, 'entertainment/add_event.html', {'form': form})
 
+
+# Перегляд деталей події
 def event_detail(request, pk):
-    event = get_object_or_404(Event, pk=pk)
+    event = get_object_or_404(Event, pk=pk)  # Отримання події за первинним ключем
     return render(request, 'entertainment/event_detail.html', {'event': event})
 
+
+# Видалення події
 def event_delete(request, pk):
-    event = get_object_or_404(Event, pk=pk)
-    if request.method == 'POST':
+    event = get_object_or_404(Event, pk=pk)  # Отримання події за первинним ключем
+    if request.method == 'POST':  # Обробка підтвердження видалення
         event.delete()
         messages.success(request, 'Подію успішно видалено.')
-        return redirect('event_list')
+        return redirect('event_list')  # Перенаправлення на список подій
     return render(request, 'entertainment/event_confirm_delete.html', {'event': event})
-
-
-
-
-
-
-
-
-

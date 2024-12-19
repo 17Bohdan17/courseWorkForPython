@@ -2,16 +2,14 @@
 
 {% block content %}
 <style>
-
         body {
             background-color: #003f88;
-            color: black; /* білий текст */
-
+            color: black;
         }
 
         .container {
-            text-align: center; /* Центрування контенту в контейнері */
-            margin-top: 50px; /* Додано відступ з верхньої частини */
+            text-align: center; /* Центрування контенту*/
+            margin-top: 50px;
             width: 600px;
         }
 
@@ -20,42 +18,33 @@
         }
 
         .navbar-light.bg-light {
-            background-color: #a8d8d8 !important; /* м'ятний колір для навбару */
+            background-color: #a8d8d8 !important;
         }
          .navbar-nav {
             justify-content: center;
             width: 100%;
         }
 
+</style>
 
-    </style>
+<div class="container my-4">
+    <h1 class="mb-4">{{ center.name }}</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Опис</h5>
+            <p class="card-text">{{ center.description }}</p>
 
-    <div class="container my-4">
-        <h1 class="mb-4">{{ center.name }}</h1>
+            <h5 class="card-title">Адреса</h5>
+            <p class="card-text">{{ center.address }}</p>
 
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Опис</h5>
-                <p class="card-text">{{ center.description }}</p>
+            <h5 class="card-title">Тип центру</h5>
+            <p class="card-text">{{ center.center_type.name }}</p>
 
-                <h5 class="card-title">Адреса</h5>
-                <p class="card-text">{{ center.address }}</p>
-
-                <h5 class="card-title">Тип центру</h5>
-                <p class="card-text">{{ center.center_type.name }}</p>
-
-
-
-
-
-
-
-
-                <!-- Кнопка для редагування центру -->
-                <a href="{% url 'center_edit' pk=center.pk %}" class="btn btn-warning mt-3">Редагувати</a>
-                <!-- Кнопка для повернення до списку центрів -->
-                <a href="{% url 'center_list' %}" class="btn btn-primary mt-3">Повернутись до списку</a>
-            </div>
+            <!-- Кнопка для редагування центру -->
+            <a href="{% url 'center_edit' pk=center.pk %}" class="btn btn-warning mt-3">Редагувати</a>
+            <!-- Кнопка для повернення до списку центрів -->
+            <a href="{% url 'center_list' %}" class="btn btn-primary mt-3">Повернутись до списку</a>
         </div>
     </div>
+</div>
 {% endblock %}

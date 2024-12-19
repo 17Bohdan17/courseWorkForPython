@@ -1,34 +1,32 @@
 {% extends 'entertainment/navbar.html' %}
-
 {% block content %}
-
- <style>
+<style>
         /* Фон сторінки */
         body {
             background-color: #6a4c9c; /* фіолетовий фон */
-            color: white; /* білий текст */
-            margin: 0; /* Відступи по замовчуванню */
-            padding: 0; /* Відступи по замовчуванню */
+            color: white;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
-            text-align: center; /* Центрування контенту в контейнері */
-            margin-top: 50px; /* Додано відступ з верхньої частини */
+            text-align: center; /* Центрування контенту */
+            margin-top: 50px;
         }
 
         .card {
-            background-color: #a8d8d8; /* м'ятний колір для карток */
-            color: black; /* текст чорний */
-            margin-bottom: 20px; /* Відступи між картками */
+            background-color: #a8d8d8;
+            color: black;
+            margin-bottom: 20px;
         }
 
         .btn {
-            margin-top: 10px; /* відступ для кнопок */
+            margin-top: 10px;
         }
 
           /* Колір фону для навбару */
         .navbar-light.bg-light {
-            background-color: #a8d8d8 !important; /* м'ятний колір для навбару */
+            background-color: #a8d8d8 !important;
         }
 
         /* Центрування карток по горизонталі */
@@ -37,7 +35,7 @@
             justify-content: center;
         }
 
-         /* Центрування навбару */
+
         .navbar-nav {
             justify-content: center;
             width: 100%;
@@ -50,17 +48,18 @@
         }
 
         h1 {
-            font-size: 2.5rem; /* збільшений розмір заголовка */
+            font-size: 2.5rem;
         }
 
         p {
-            font-size: 1.2rem; /* збільшений розмір тексту */
+            font-size: 1.2rem;
         }
 
         .btn-secondary {
-            width: auto; /* коригування ширини кнопки */
+            width: auto;
         }
-    </style>
+
+</style>
 <div class="container my-4">
     <h1>Підтвердження видалення</h1>
     <p>Ви впевнені, що хочете видалити подію <strong>{{ event.name }}</strong>?</p>

@@ -6,18 +6,16 @@
     <title>Список розважальних центрів</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <style>
-
         body {
             background-color: #003f88 !important;
-            color: black; /* білий текст */
+            color: black;
 
         }
 
         .container {
-            text-align: center; /* Центрування контенту в контейнері */
-            margin-top: 50px; /* Додано відступ з верхньої частини */
+            text-align: center; /* Центрування контенту*/
+            margin-top: 50px;
             width: 600px;
         }
 
@@ -26,66 +24,42 @@
         }
 
         .navbar-light.bg-light {
-            background-color: #a8d8d8 !important; /* м'ятний колір для навбару */
+            background-color: #a8d8d8 !important;
         }
          .navbar-nav {
             justify-content: center;
             width: 100%;
         }
 
-
-    </style>
+</style>
 <body>
 {% extends 'entertainment/navbar.html' %}
 
 {% block content %}
-    <div class="container my-4">
-        <h1>Розважальні центри</h1>
-
-
-        <!-- Друга частина контента, например, список центрів -->
-        <h3 class="mt-4">Список розважальних центрів</h3>
-
-        <div class="row">
-            {% for center in centers %}
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ center.name }}</h5>
-                            <p class="card-text">{{ center.center_type.name }}</p>
-                            <a href="{% url 'center_detail' pk=center.pk %}" class="btn btn-primary">Докладніше</a>
-                            <a href="{% url 'center_edit' pk=center.pk %}" class="btn btn-warning">Редагувати</a>
-                            <form method="post" action="{% url 'center_delete' pk=center.pk %}" class="d-inline">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Видалити</button>
-                            </form>
-                        </div>
-                    </div>
+<div class="container my-4">
+    <h1>Розважальні центри</h1>
+    <h3 class="mt-4">Список розважальних центрів</h3>
+    <div class="row">
+        {% for center in centers %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ center.name }}</h5>
+                    <p class="card-text">{{ center.center_type.name }}</p>
+                    <a href="{% url 'center_detail' pk=center.pk %}" class="btn btn-primary">Докладніше</a>
+                    <a href="{% url 'center_edit' pk=center.pk %}" class="btn btn-warning">Редагувати</a>
+                    <form method="post" action="{% url 'center_delete' pk=center.pk %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Видалити</button>
+                    </form>
                 </div>
-            {% endfor %}
+            </div>
         </div>
-
-        <a href="{% url 'center_add' %}" class="btn btn-success mt-4">Додати новий центр</a>
+        {% endfor %}
     </div>
+    <a href="{% url 'center_add' %}" class="btn btn-success mt-4">Додати новий центр</a>
+</div>
 {% endblock %}
-
-<!-- Навігаційна панель -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Розважальні центри</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'center_list' %}">Головна</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'center_add' %}">Додати центр</a>
-            </li>
-        </ul>
-    </div>
-</nav>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
